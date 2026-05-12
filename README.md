@@ -30,3 +30,43 @@ A super-resolution method based on atomic norm minimization that enables gridles
 
 These implementations serve as reference baselines to fairly evaluate the proposed two-stage ISAC framework under identical simulation conditions (e.g., 5G NR waveform, channel model, SNR settings).
 
+## SIB1 Link-Level Communication Simulation
+
+The `SIB1_minimal` folder contains a compact MATLAB link-level simulation program for evaluating the communication-side impact of inserting sensing pilot resources into a 5G NR SSB/SIB1 waveform.
+
+The simulation compares SIB1 access and decoding success rates under two pilot strategies:
+
+- `None`: standard SSB + RMSI/SIB1 waveform without additional sensing pilots.
+- `Sparse`: SSB + RMSI/SIB1 waveform with sparse sensing pilot resource-element insertion.
+
+The workflow generates the transmit waveform, applies a 3GPP UMi LOS large-scale channel, TDL-D fading, swept transmit-beam gain, shadow fading, and receiver noise, then runs the SSB/PBCH/PDCCH/PDSCH recovery chain to measure BCH, DCI, SIB1, and overall access success rates.
+
+The entry script is:
+
+```matlab
+cd SIB1_minimal
+main
+```
+
+For a short smoke test:
+
+```matlab
+mainArgs = {'quick', struct( ...
+    'NumMonteCarloFine', 1, ...
+    'UseParallelFine', false, ...
+    'UseParallelCoarse', false, ...
+    'NumWorkers', [])};
+main
+```
+
+Required MATLAB products:
+
+- MATLAB
+- 5G Toolbox
+- Communications Toolbox
+- Phased Array System Toolbox
+- Signal Processing Toolbox
+- Parallel Computing Toolbox
+
+Parallel Computing Toolbox is used for the full Monte Carlo sweep. The smoke-test configuration above disables parallel execution.
+
