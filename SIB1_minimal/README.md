@@ -2,12 +2,17 @@
 
 This folder contains a compact MATLAB link-level simulation for evaluating
 the communication impact of inserting sensing pilot resources into a 5G NR
-SSB/SIB1 waveform.
+Synchronization Signal Block (SSB) and System Information Block 1 (SIB1)
+waveform.
+
+In this simulation, SIB1 carries the Remaining Minimum System Information
+(RMSI) needed during initial access.
 
 The main workflow compares the end-to-end SIB1 access and decoding success
 rate for two pilot strategies:
 
-- `None`: standard SSB + RMSI/SIB1 waveform without additional sensing pilots.
+- `None`: standard SSB + Remaining Minimum System Information (RMSI) / SIB1
+  waveform without additional sensing pilots.
 - `Sparse`: SSB + RMSI/SIB1 waveform with sparse sensing pilot RE insertion.
 
 The simulation generates the transmit waveform, applies a 3GPP UMi LOS
